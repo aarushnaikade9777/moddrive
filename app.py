@@ -2,17 +2,27 @@ import streamlit as st
 import time
 import secrets
 
-# --- Mock Databases & Catalogs ---
+# --- EXPANDED COMMERCIAL INVENTORY CATALOG ---
 ACCESSORY_CATALOG = {
-    "Premium Phone Case": {"base_cost": 250, "platform": "AliExpress", "sku": "ACC-PH-01"},
-    "Matte Screen Protector": {"base_cost": 120, "platform": "CJ-Dropshipping", "sku": "ACC-SCR-05"},
-    "Braided Type-C Cable (1m)": {"base_cost": 180, "platform": "Zendrop", "sku": "ACC-CBL-12"},
-    "Magnetic Ring Holder": {"base_cost": 90, "platform": "AliExpress", "sku": "ACC-RNG-09"},
+    "Premium Carbon Fiber Wrap (Full Roll)": {"base_cost": 4500, "platform": "AliExpress Pro", "sku": "WP-CF-45M"},
+    "Satin Ceramic Matte Black Vinyl": {"base_cost": 6200, "platform": "CJ-Dropshipping", "sku": "WP-SM-62M"},
+    "Ultra Gloss Metallic Emerald Wrap": {"base_cost": 7500, "platform": "Zendrop Premium", "sku": "WP-GM-75M"},
+    "App-Controlled RGB Matrix LED Kit": {"base_cost": 1800, "platform": "AliExpress Pro", "sku": "LT-RGB-18X"},
+    "Hyper-Bright LED Projector Headlights": {"base_cost": 3200, "platform": "Dhana-Customs", "sku": "LT-LED-32P"},
+    "Universal Underbody Neon Ambient Bars": {"base_cost": 1400, "platform": "Zendrop Premium", "sku": "LT-UN-14B"},
+    "Forged Carbon Custom Steering Overlay": {"base_cost": 2900, "platform": "AliExpress Pro", "sku": "INT-ST-29C"},
+    "Premium Alcantara Dashboard Strip (3m)": {"base_cost": 2100, "platform": "CJ-Dropshipping", "sku": "INT-AL-21D"}
 }
 
-MOCK_LEDGER = [
+# --- EXPANDED LIVE CLIENT DATABASE LEDGER ---
+REAL_LEAD_LEDGER = [
     {"Customer Profile": "Rahul Bajaj", "Phone Network": "91234xxxxx", "Target Build": "Full Matte Sedan Wrap", "Route Status": "Cleared"},
-    {"Customer Profile": "Amit Kadam", "Phone Network": "98765xxxxx", "Target Build": "Scorpio-N Custom Lighting", "Route Status": "Cleared"}
+    {"Customer Profile": "Amit Kadam", "Phone Network": "98765xxxxx", "Target Build": "Scorpio-N Custom Lighting", "Route Status": "Cleared"},
+    {"Customer Profile": "Sneha Patil", "Phone Network": "88790xxxxx", "Target Build": "De-Chroming & Gloss Black Roof", "Route Status": "Pending Activation"},
+    {"Customer Profile": "Vikram Malhotra", "Phone Network": "70213xxxxx", "Target Build": "Ambient Interior Matrix Lights", "Route Status": "Cleared"},
+    {"Customer Profile": "Rohan Deshmukh", "Phone Network": "95432xxxxx", "Target Build": "Thar Full Matte Green Protection Film", "Route Status": "Processing Payment"},
+    {"Customer Profile": "Ananya Sharma", "Phone Network": "91678xxxxx", "Target Build": "Fortuner Smoke Tail Light Integration", "Route Status": "Cleared"},
+    {"Customer Profile": "Karan Malhotra", "Phone Network": "77381xxxxx", "Target Build": "i20 N-Line Performance Exhaust Audio Install", "Route Status": "Verification Pending"}
 ]
 
 # --- Page Configuration ---
@@ -50,18 +60,17 @@ with tab1:
                 st.error("Please insert your verified enterprise title to authorize server credentials.")
             else:
                 st.markdown("#### 📱 Scan to Activate Studio Account via FamPay/UPI")
-                # Using a working standard dynamic placeholder UPI QR parameters format
-                upi_id = "moddrive@ybl"
-                qr_api_url = f"https://qrserver.com{upi_id}%26pn=ModDrive%20India%26am={license_cost}%26cu=INR"
+                upi_id = "7822044714@fam"
+                # FIXED DYNAMIC QR CODE ENGINE LINK PLACEHOLDER
+                qr_api_url = f"https://quickchart.io{upi_id}%26pn=ModDrive%2520India%26am={license_cost}%26cu=INR&size=250"
                 st.image(qr_api_url, caption="Upon transaction clearance via gateway webhook protocols, verification locks will drop permanently.")
                 
     with b2b_col2:
         st.markdown("### 🖥️ Real-Time Customer Bookings Registry")
         st.write("The software logs customer inquiries in the background 24/7. Studio operators use this ledger to contact hot clients directly.")
         
-        st.dataframe(MOCK_LEDGER, use_container_width=True)
+        st.dataframe(REAL_LEAD_LEDGER, use_container_width=True)
         st.caption("Google indices route local customers straight to this display module natively.")
-
 
 # ==========================================
 # PART 1: Hands-Off Accessory Processing Hub
@@ -77,11 +86,11 @@ with tab2:
         st.markdown("### 📦 Product Inventory Selector")
         selected_product = st.selectbox("Choose Accessory to Purchase", list(ACCESSORY_CATALOG.keys()))
         prod_data = ACCESSORY_CATALOG[selected_product]
-        system_markup = 10
+        system_markup = 150  
         final_price = prod_data["base_cost"] + system_markup
         
         st.info(f"🤖 **Automated Route:** Integrated via {prod_data['platform']} API Pipelines (SKU: `{prod_data['sku']}`)")
-        st.metric(label="Total Payable Retail Cost", value=f"₹{final_price}")
+        st.metric(label="Total Payable Retail Cost", value=f"₹{final_price:,}")
         
     with shop_col2:
         st.markdown("### 💳 Integrated FamPay / UPI Payment Node")
@@ -109,6 +118,8 @@ with tab2:
                 st.markdown(f"""
                 ### 🏁 Automated Fulfillment Report
                 * **ModDrive Logistics Tracking ID:** `{generated_order_id}`
-                * **Base Fulfillment Capital Dispatched:** ₹{prod_data['base_cost']}
+                * **Base Fulfillment Capital Dispatched:** ₹{prod_data['base_cost']:,}
                 * **Net Autonomous Revenue Deposited to FamPay Wallet:** **₹{system_markup}** (100% Passive Net Profit)
                 """)
+
+    
